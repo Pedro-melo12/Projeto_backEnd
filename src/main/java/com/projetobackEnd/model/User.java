@@ -24,36 +24,34 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    
-    @Column(name = "username",nullable = false)
+
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "password",nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "userRole",nullable = false)
+    @Column(name = "userRole", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;
-    
+
     @JsonBackReference
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities(){
-        if(role == UserRole.ADMIN){
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (role == UserRole.ADMIN) {
             return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"),
                     new SimpleGrantedAuthority("ROLE_USER"));
         }
@@ -65,5 +63,5 @@ public class User implements UserDetails {
     public String getUsername() {
         return username;
     }
-    
+
 }

@@ -12,9 +12,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class OrderResponseDTO {
     private UUID id;
-    private String username; // Nome do usuário
+    private String username; 
     private Double totalPrice;
     private List<ProductDTO> products;
 
-    // Construtores, Getters e Setters
 }

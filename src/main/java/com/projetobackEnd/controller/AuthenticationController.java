@@ -32,8 +32,9 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthDTO dto){
-        UsernamePasswordAuthenticationToken credentials = new UsernamePasswordAuthenticationToken(dto.username(), dto.password());
+    public ResponseEntity login(@RequestBody @Valid AuthDTO dto) {
+        UsernamePasswordAuthenticationToken credentials = new UsernamePasswordAuthenticationToken(dto.username(),
+                dto.password());
         Authentication authenticate = authenticationManager.authenticate(credentials);
 
         String token = tokenService.generateToken((User) authenticate.getPrincipal());
@@ -42,13 +43,13 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterDTO registerDTO){
+    public ResponseEntity register(@RequestBody @Valid RegisterDTO registerDTO) {
 
-        if(userRepository.findByUsername(registerDTO.username()) != null){
+        if (userRepository.findByUsername(registerDTO.username()) != null) {
             return ResponseEntity.badRequest().build();
         }
 
-        User user =  new User();
+        User user = new User();
         user.setUsername(registerDTO.username());
         user.setPassword(new BCryptPasswordEncoder().encode(registerDTO.password()));
         user.setRole(registerDTO.role());
@@ -59,4 +60,3 @@ public class AuthenticationController {
     }
 
 }
-

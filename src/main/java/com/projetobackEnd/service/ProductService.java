@@ -12,7 +12,7 @@ import com.projetobackEnd.repository.ProductRepository;
 
 @Service
 public class ProductService {
-    
+
     @Autowired
     ProductRepository productRepository;
 
@@ -20,20 +20,18 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    // Método para buscar um produto por ID
     public Optional<Product> getProductById(UUID id) {
         return productRepository.findById(id);
     }
 
-    // Método para buscar todos os produtos
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
-    // Método para atualizar um produto
     public Product updateProduct(UUID id, Product updatedProduct) {
         return productRepository.findById(id)
-                .map(existingProduct -> {existingProduct.setName(updatedProduct.getName());
+                .map(existingProduct -> {
+                    existingProduct.setName(updatedProduct.getName());
                     existingProduct.setDescription(updatedProduct.getDescription());
                     existingProduct.setPrice(updatedProduct.getPrice());
                     return productRepository.save(existingProduct);
@@ -41,10 +39,7 @@ public class ProductService {
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado com o ID: " + id));
     }
 
-    // Método para deletar um produto por ID
     public void deleteProduct(UUID id) {
         productRepository.deleteById(id);
     }
 }
-
-

@@ -8,7 +8,4 @@ import com.projetobackEnd.model.Order;
 
 public interface OrderRepository extends JpaRepository<Order, UUID> {
 
-    
-
-    
 }

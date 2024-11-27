@@ -5,8 +5,6 @@ import com.projetobackEnd.dto.OrderDTO;
 import com.projetobackEnd.model.Order;
 import com.projetobackEnd.service.OrderService;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
 
 @RestController
 @RequestMapping("/orders")
@@ -34,22 +31,17 @@ public class OrderController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
 
-
-
-    // Deletar um pedido
     @DeleteMapping("/{orderId}")
     public ResponseEntity<String> deleteOrder(@PathVariable UUID orderId) {
         boolean deleted = orderService.deleteOrder(orderId);
         if (deleted) {
-            return new ResponseEntity<>("Pedido deletado com sucesso", HttpStatus.OK);
+            return ResponseEntity.noContent().build();
         } else {
-            return new ResponseEntity<>("Pedido não encontrado", HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
     }
 
-    // Atualizar um pedido
     @PutMapping("/{orderId}")
     public ResponseEntity<Order> updateOrder(@PathVariable UUID orderId, @RequestBody Order updatedOrder) {
         Order updated = orderService.updateOrder(orderId, updatedOrder);
@@ -60,7 +52,6 @@ public class OrderController {
         }
     }
 
-    // Obter um pedido por ID
     @GetMapping("/{orderId}")
     public ResponseEntity<Order> getOrderById(@PathVariable UUID orderId) {
         Optional<Order> order = orderService.getOrderById(orderId);
@@ -71,7 +62,6 @@ public class OrderController {
         }
     }
 
-    // Obter todos os pedidos
     @GetMapping
     public ResponseEntity<List<Order>> getAllOrders() {
         List<Order> orders = orderService.getAllOrders();

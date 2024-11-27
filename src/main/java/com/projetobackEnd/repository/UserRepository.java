@@ -12,9 +12,9 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
 
-    // Retorna um UserDetails para autenticação (continua funcionando como está)
+
     UserDetails findByUsername(String username);
 
-    // Método adicional para obter um User comum
+    
     Optional<User> findByUsernameIgnoreCase(String username);
 }

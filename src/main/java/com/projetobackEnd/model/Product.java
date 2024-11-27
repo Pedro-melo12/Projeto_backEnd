@@ -23,27 +23,26 @@ import lombok.NoArgsConstructor;
 @Table(name = "products")
 public class Product {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private UUID id;
 
-    @Column(name = "productName",nullable = false,length = 80)
-    private String name;
-    
-    @Column(name = "description",nullable = false,length = 80)
-    private String description;
-    
-    @Column(name = "price",nullable = false,length = 20)
-    private int price;  
+  @Column(name = "productName", nullable = false, length = 80)
+  private String name;
 
-    @JsonBackReference
-    @ManyToMany(mappedBy = "products")
-    private List<Order> orders;
+  @Column(name = "description", nullable = false, length = 80)
+  private String description;
 
+  @Column(name = "price", nullable = false, length = 20)
+  private int price;
 
-    public Product(String name, String description, int price) {
-      this.name = name;
-      this.description = description;
-      this.price = price;
+  @JsonBackReference
+  @ManyToMany(mappedBy = "products")
+  private List<Order> orders;
+
+  public Product(String name, String description, int price) {
+    this.name = name;
+    this.description = description;
+    this.price = price;
   }
 }

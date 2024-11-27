@@ -20,7 +20,6 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    // Endpoint para criar um novo produto
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO) {
         Product product = new Product();
@@ -29,14 +28,12 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
     }
 
-    // Endpoint para buscar todos os produtos
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> products = productService.getAllProducts();
         return ResponseEntity.ok(products);
     }
 
-    // Endpoint para buscar um produto por ID
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable UUID id) {
         Optional<Product> optionalProduct = productService.getProductById(id);
@@ -44,7 +41,6 @@ public class ProductController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Endpoint para atualizar um produto
     @PutMapping("/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable UUID id, @RequestBody ProductDTO productDTO) {
         Optional<Product> optionalProduct = productService.getProductById(id);
@@ -58,7 +54,6 @@ public class ProductController {
         }
     }
 
-    // Endpoint para deletar um produto por ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable UUID id) {
         Optional<Product> optionalProduct = productService.getProductById(id);
