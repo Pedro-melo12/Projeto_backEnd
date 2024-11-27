@@ -1,4 +1,5 @@
 Projeto de Gestão de Pedidos
+
 Este projeto é uma aplicação de gestão de pedidos onde os usuários podem fazer pedidos de produtos. Os pedidos podem ser criados, atualizados e visualizados, com associação aos usuários que realizam as compras. A aplicação é construída com Spring Boot, JPA e JWT para autenticação.
 
 Tecnologias Utilizadas
@@ -22,6 +23,7 @@ git clone https://github.com/seu-usuario/seu-repositorio.git
 cd seu-repositorio
 2. Configuração do Banco de Dados
 Crie um banco de dados no PostgreSQL com o nome order_management (ou outro de sua escolha).
+
 3. Configuração das Variáveis de Ambiente
 Altere o arquivo application.properties ou application.yml para definir as configurações do banco de dados:
 
@@ -32,7 +34,7 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
 4. Configuração de Autenticação (JWT)
-Caso você utilize autenticação JWT, defina as variáveis de ambiente para a chave secreta do JWT e outros parâmetros de segurança no arquivo application.properties.
+Caso você utilize autenticação JWT, defina as variáveis de ambiente para a chave secreta do JWT e outros parâmetros de segurança no arquivo application.properties:
 
 jwt.secret=your_jwt_secret_key
 jwt.expiration=3600000
